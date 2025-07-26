@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnHub - Online Learning Platform</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #3498db;
+            color: #3498db;
+        }
+        
+        .btn-outline:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        /* Hero Section */
+        #hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            text-align: center;
+            margin-top: -80px;
+            padding-top: 80px;
+        }
+        /* Menu Toggle Styles */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #2c3e50;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        display: none;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links li {
+        margin: 10px 0;
+    }
+}
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        /* Courses Section */
+        #courses {
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .course-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .course-card:hover .course-image img {
+            transform: scale(1.1);
+        }
+        
+        .course-info {
+            padding: 20px;
+        }
+        
+        .course-info h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .course-info .instructor {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .course-info p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .course-meta .duration {
+            color: #7f8c8d;
+        }
+        
+        .course-meta .price {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        /* Auth Forms */
+        .auth-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        /* Dashboard */
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .dashboard-sidebar {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-main {
+            flex: 3;
+            min-width: 300px;
+        }
+        
+        .user-profile {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .user-profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #3498db;
+        }
+        
+        .user-profile h3 {
+            margin-bottom: 5px;
+        }
+        
+        .user-profile p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .nav-menu a {
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            color: #2c3e50;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-menu a:hover, .nav-menu a.active {
+            background-color: #f0f7ff;
+            color: #3498db;
+        }
+        
+        .dashboard-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            border-radius: 5px;
+        }
+        
+        /* Course Content */
+        .course-content {
+            display: none;
+        }
+        
+        .course-content.active {
+            display: block;
+        }
+        
+        .content-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-item h3 {
+            margin-bottom: 10px;
+        }
+        
+        .content-item p {
+            margin-bottom: 15px;
+        }
+        
+        .content-item.completed {
+            border-left: 4px solid #27ae60;
+        }
+        
+        .complete-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .dashboard-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-container {
+                padding: 20px;
+            }
+        }
+        
+        /* Hidden class for toggling elements */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">eduPAL</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#hero" id="homeLink">Home</a></li>
+                    <li><a href="#courses" id="coursesLink">Courses</a></li>
+                    <li class="hidden" id="dashboardLinkLi"><a href="#dashboard" id="dashboardLink">Dashboard</a></li>
+                    <li class="hidden" id="logoutLinkLi"><a href="#" id="logoutLink">Logout</a></li>
+                    <li id="loginLinkLi"><a href="#login" id="loginLink">Login</a></li>
+                    <li id="registerLinkLi"><a href="#register" id="registerLink">Register</a></li>
+                </ul>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Expand Your Knowledge</h1>
+                    <p>Join thousands of students learning new skills with our comprehensive online courses</p>
+                    <a href="#courses" class="btn">Browse Courses</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses">
+            <div class="container">
+                <h2 class="section-title">Our Courses</h2>
+                <div class="courses-grid" id="coursesGrid">
+                    <!-- Courses will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Form -->
+        <section id="login" class="hidden">
+            <div class="container">
+                <div class="auth-container">
+                    <h2>Login to Your Account</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginUsername">Username</label>
+                            <input type="text" id="loginUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Login</button>
+                        </div>
+                        <div class="form-footer">
+                            Don't have an account? <a href="#register" id="showRegister">Register here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Register Form -->
+        <section id="register" class="hidden">
+            <div class="container">
+                <div class="auth-container">
+                    <h2>Create an Account</h2>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerUsername">Username</label>
+                            <input type="text" id="registerUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <input type="email" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Register</button>
+                        </div>
+                        <div class="form-footer">
+                            Already have an account? <a href="#login" id="showLogin">Login here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="hidden">
+            <div class="container">
+                <div class="dashboard-container">
+                    <div class="dashboard-sidebar">
+                        <div class="user-profile">
+                            <img src="data:image/jpeg;base64,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" alt="User Profile" id="userProfileImage">
+                            <h3 id="dashboardUsername"></h3>
+                            <p id="dashboardEmail"></p>
+                        </div>
+                        <ul class="nav-menu">
+                            <li><a href="#my-courses" class="active" id="myCoursesLink">My Courses</a></li>
+                            <li><a href="#progress" id="progressLink">Learning Progress</a></li>
+                            <li><a href="#account" id="accountLink">Account Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-main">
+                        <!-- My Courses -->
+                        <div class="dashboard-card" id="myCoursesContent">
+                            <h2>My Courses</h2>
+                            <div id="enrolledCourses">
+                                <!-- Enrolled courses will be displayed here -->
+                                <p>You haven't enrolled in any courses yet.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Course Content (hidden by default) -->
+                        <div class="dashboard-card hidden" id="courseContent">
+                            <h2 id="courseContentTitle"></h2>
+                            <div id="courseContentItems">
+                                <!-- Course content will be displayed here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Progress -->
+                        <div class="dashboard-card hidden" id="progressContent">
+                            <h2>Learning Progress</h2>
+                            <div id="progressStats">
+                                <!-- Progress statistics will be displayed here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Account Settings -->
+                        <div class="dashboard-card hidden" id="accountContent">
+                            <h2>Account Settings</h2>
+                            <form id="accountForm">
+                                <div class="form-group">
+                                    <label for="accountUsername">Username</label>
+                                    <input type="text" id="accountUsername" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accountEmail">Email</label>
+                                    <input type="email" id="accountEmail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn">Update Account</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 eduPAL. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample Data
+        const courses = [
+            {
+                id: 1,
+                title: "Web Development Fundamentals",
+                instructor: "Sarah Johnson",
+                description: "Learn the basics of HTML, CSS, and JavaScript to build your first website.",
+                duration: "6 weeks",
+                price: "Free",
+                image: "data:image/jpeg;base64,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",
+                content: [
+                    { id: 1, title: "Introduction to HTML", content: "Learn the structure of web pages with HTML.", completed: false },
+                    { id: 2, title: "Styling with CSS", content: "Make your web pages beautiful with CSS.", completed: false },
+                    { id: 3, title: "JavaScript Basics", content: "Add interactivity to your websites with JavaScript.", completed: false },
+                    { id: 4, title: "Responsive Design", content: "Make your websites work on all devices.", completed: false },
+                    { id: 5, title: "Final Project", content: "Build your own portfolio website.", completed: false }
+                ]
+            },
+            {
+                id: 2,
+                title: "Python Programming",
+                instructor: "Michael Chen",
+                description: "Master Python programming from basics to advanced concepts.",
+                duration: "8 weeks",
+                price: "$49.99",
+                image: "https://via.placeholder.com/600x400?text=Python",
+                content: [
+                    { id: 1, title: "Python Basics", content: "Learn Python syntax and basic concepts.", completed: false },
+                    { id: 2, title: "Data Structures", content: "Work with lists, dictionaries, and tuples.", completed: false },
+                    { id: 3, title: "Functions and Modules", content: "Organize your code with functions and modules.", completed: false },
+                    { id: 4, title: "Object-Oriented Programming", content: "Learn classes and objects in Python.", completed: false },
+                    { id: 5, title: "Final Project", content: "Build a Python application.", completed: false }
+                ]
+            },
+            {
+                id: 3,
+                title: "Data Science Essentials",
+                instructor: "David Wilson",
+                description: "Introduction to data analysis and visualization with Python.",
+                duration: "10 weeks",
+                price: "$79.99",
+                image: "https://via.placeholder.com/600x400?text=Data+Science",
+                content: [
+                    { id: 1, title: "Introduction to Data Science", content: "What is data science and why it matters.", completed: false },
+                    { id: 2, title: "Pandas Basics", content: "Data manipulation with Pandas.", completed: false },
+                    { id: 3, title: "Data Visualization", content: "Create charts and graphs with Matplotlib.", completed: false },
+                    { id: 4, title: "Data Cleaning", content: "Handle missing data and outliers.", completed: false },
+                    { id: 5, title: "Final Project", content: "Analyze a real-world dataset.", completed: false }
+                ]
+            },
+            {
+                id: 4,
+                title: "Mobile App Development",
+                instructor: "Emily Rodriguez",
+                description: "Build cross-platform mobile apps with React Native.",
+                duration: "12 weeks",
+                price: "$99.99",
+                image: "https://via.placeholder.com/600x400?text=Mobile+App",
+                content: [
+                    { id: 1, title: "React Native Basics", content: "Introduction to React Native framework.", completed: false },
+                    { id: 2, title: "UI Components", content: "Building user interfaces in React Native.", completed: false },
+                    { id: 3, title: "State Management", content: "Managing app state with Redux.", completed: false },
+                    { id: 4, title: "API Integration", content: "Connecting your app to backend services.", completed: false },
+                    { id: 5, title: "Final Project", content: "Build and publish your own app.", completed: false }
+                ]
+            },
+            {
+                id: 5,
+                title: "Digital Marketing",
+                instructor: "Jessica Lee",
+                description: "Learn strategies for SEO, social media, and online advertising.",
+                duration: "6 weeks",
+                price: "$59.99",
+                image: "https://via.placeholder.com/600x400?text=Marketing",
+                content: [
+                    { id: 1, title: "SEO Fundamentals", content: "How search engines work and ranking factors.", completed: false },
+                    { id: 2, title: "Social Media Marketing", content: "Strategies for Facebook, Instagram, and Twitter.", completed: false },
+                    { id: 3, title: "Content Marketing", content: "Creating engaging content that converts.", completed: false },
+                    { id: 4, title: "Google Ads", content: "Running effective pay-per-click campaigns.", completed: false },
+                    { id: 5, title: "Final Project", content: "Create a marketing plan for a business.", completed: false }
+                ]
+            },
+            {
+                id: 6,
+                title: "Graphic Design",
+                instructor: "Robert Smith",
+                description: "Master Adobe Photoshop and Illustrator for professional designs.",
+                duration: "8 weeks",
+                price: "$69.99",
+                image: "https://via.placeholder.com/600x400?text=Graphic+Design",
+                content: [
+                    { id: 1, title: "Photoshop Basics", content: "Introduction to Photoshop interface and tools.", completed: false },
+                    { id: 2, title: "Photo Manipulation", content: "Editing and enhancing photographs.", completed: false },
+                    { id: 3, title: "Illustrator Basics", content: "Creating vector graphics with Illustrator.", completed: false },
+                    { id: 4, title: "Logo Design", content: "Principles of effective logo design.", completed: false },
+                    { id: 5, title: "Final Project", content: "Design a brand identity package.", completed: false }
+                ]
+            },
+            {
+                id: 7,
+                title: "Artificial Intelligence",
+                instructor: "Dr. Alan Turing",
+                description: "Introduction to machine learning and neural networks.",
+                duration: "12 weeks",
+                price: "$129.99",
+                image: "https://via.placeholder.com/600x400?text=AI",
+                content: [
+                    { id: 1, title: "AI Fundamentals", content: "History and basic concepts of AI.", completed: false },
+                    { id: 2, title: "Machine Learning Basics", content: "Supervised and unsupervised learning.", completed: false },
+                    { id: 3, title: "Neural Networks", content: "Introduction to deep learning.", completed: false },
+                    { id: 4, title: "Natural Language Processing", content: "Working with text data.", completed: false },
+                    { id: 5, title: "Final Project", content: "Build a simple AI model.", completed: false }
+                ]
+            },
+            {
+                id: 8,
+                title: "Cybersecurity",
+                instructor: "Lisa Wong",
+                description: "Learn how to protect systems from digital attacks.",
+                duration: "10 weeks",
+                price: "$89.99",
+                image: "https://via.placeholder.com/600x400?text=Cybersecurity",
+                content: [
+                    { id: 1, title: "Security Fundamentals", content: "Basic concepts of information security.", completed: false },
+                    { id: 2, title: "Network Security", content: "Protecting networks from intrusions.", completed: false },
+                    { id: 3, title: "Cryptography", content: "Encryption and decryption techniques.", completed: false },
+                    { id: 4, title: "Ethical Hacking", content: "Penetration testing fundamentals.", completed: false },
+                    { id: 5, title: "Final Project", content: "Security audit of a sample system.", completed: false }
+                ]
+            },
+            {
+                id: 9,
+                title: "UX/UI Design",
+                instructor: "Sophia Martinez",
+                description: "Create user-friendly interfaces with Figma and Adobe XD.",
+                duration: "8 weeks",
+                price: "$79.99",
+                image: "https://via.placeholder.com/600x400?text=UX+UI",
+                content: [
+                    { id: 1, title: "Design Principles", content: "Fundamentals of good design.", completed: false },
+                    { id: 2, title: "User Research", content: "Understanding user needs and behaviors.", completed: false },
+                    { id: 3, title: "Wireframing", content: "Creating low-fidelity prototypes.", completed: false },
+                    { id: 4, title: "Prototyping", content: "Interactive prototypes with Figma.", completed: false },
+                    { id: 5, title: "Final Project", content: "Design a complete app interface.", completed: false }
+                ]
+            },
+            {
+                id: 10,
+                title: "Blockchain Basics",
+                instructor: "James Nakamoto",
+                description: "Understand blockchain technology and cryptocurrencies.",
+                duration: "6 weeks",
+                price: "$59.99",
+                image: "https://via.placeholder.com/600x400?text=Blockchain",
+                content: [
+                    { id: 1, title: "Blockchain Fundamentals", content: "How blockchain works.", completed: false },
+                    { id: 2, title: "Cryptocurrencies", content: "Bitcoin, Ethereum, and other coins.", completed: false },
+                    { id: 3, title: "Smart Contracts", content: "Programming on the blockchain.", completed: false },
+                    { id: 4, title: "Decentralized Apps", content: "Building DApps.", completed: false },
+                    { id: 5, title: "Final Project", content: "Create a simple smart contract.", completed: false }
+                ]
+            }
+        ];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            checkAuthStatus();
+            
+            // Display courses
+            displayCourses();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Handle hash changes for navigation
+            window.addEventListener('hashchange', handleHashChange);
+            handleHashChange();
+        });
+
+        // Check authentication status
+        function checkAuthStatus() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                // User is logged in
+                document.getElementById('loginLinkLi').classList.add('hidden');
+                document.getElementById('registerLinkLi').classList.add('hidden');
+                document.getElementById('dashboardLinkLi').classList.remove('hidden');
+                document.getElementById('logoutLinkLi').classList.remove('hidden');
+            } else {
+                // User is not logged in
+                document.getElementById('loginLinkLi').classList.remove('hidden');
+                document.getElementById('registerLinkLi').classList.remove('hidden');
+                document.getElementById('dashboardLinkLi').classList.add('hidden');
+                document.getElementById('logoutLinkLi').classList.add('hidden');
+            }
+        }
+
+        // Display all courses
+        function displayCourses() {
+            const coursesGrid = document.getElementById('coursesGrid');
+            coursesGrid.innerHTML = '';
+            
+            courses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = 'course-card';
+                courseCard.innerHTML = `
+                    <div class="course-image">
+                        <img src="${course.image}" alt="${course.title}">
+                    </div>
+                    <div class="course-info">
+                        <h3>${course.title}</h3>
+                        <p class="instructor">By ${course.instructor}</p>
+                        <p>${course.description}</p>
+                        <div class="course-meta">
+                            <span class="duration">${course.duration}</span>
+                            <span class="price">${course.price}</span>
+                        </div>
+                        <button class="btn btn-outline enroll-btn" data-course-id="${course.id}">Enroll Now</button>
+                    </div>
+                `;
+                coursesGrid.appendChild(courseCard);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                loginUser();
+            });
+            
+            // Register form
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                registerUser();
+            });
+            
+            // Logout link
+            document.getElementById('logoutLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
+            
+            // Show register form
+            document.getElementById('showRegister').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('login').classList.add('hidden');
+                document.getElementById('register').classList.remove('hidden');
+                window.location.hash = 'register';
+            });
+            
+            // Show login form
+            document.getElementById('showLogin').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('register').classList.add('hidden');
+                document.getElementById('login').classList.remove('hidden');
+                window.location.hash = 'login';
+            });
+            
+            // Dashboard navigation
+            document.getElementById('myCoursesLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showDashboardSection('myCoursesContent');
+            });
+            
+            document.getElementById('progressLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showDashboardSection('progressContent');
+            });
+            
+            document.getElementById('accountLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showDashboardSection('accountContent');
+            });
+            
+            // Account form
+            document.getElementById('accountForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                updateAccount();
+            });
+            
+            // Delegate events for dynamically created elements
+            document.addEventListener('click', function(e) {
+                // Enroll button
+                if (e.target.classList.contains('enroll-btn')) {
+                    e.preventDefault();
+                    const courseId = parseInt(e.target.getAttribute('data-course-id'));
+                    enrollInCourse(courseId);
+                }
+                
+                // View course button
+                if (e.target.classList.contains('view-course-btn')) {
+                    e.preventDefault();
+                    const courseId = parseInt(e.target.getAttribute('data-course-id'));
+                    showCourseContent(courseId);
+                }
+                
+                // Back to courses button
+                if (e.target.id === 'backToCourses') {
+                    e.preventDefault();
+                    showDashboardSection('myCoursesContent');
+                }
+                
+                // Complete content button
+                if (e.target.classList.contains('complete-btn')) {
+                    e.preventDefault();
+                    const courseId = parseInt(e.target.getAttribute('data-course-id'));
+                    const contentId = parseInt(e.target.getAttribute('data-content-id'));
+                    markContentComplete(courseId, contentId);
+                }
+            });
+        }
+
+        // Handle hash changes for navigation
+        function handleHashChange() {
+            const hash = window.location.hash;
+            
+            // Hide all sections first
+            document.getElementById('hero').classList.add('hidden');
+            document.getElementById('courses').classList.add('hidden');
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('register').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            
+            // Show the appropriate section based on hash
+            if (hash === '#login') {
+                document.getElementById('login').classList.remove('hidden');
+            } else if (hash === '#register') {
+                document.getElementById('register').classList.remove('hidden');
+            } else if (hash === '#dashboard') {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser) {
+                    showDashboard(currentUser);
+                    document.getElementById('dashboard').classList.remove('hidden');
+                } else {
+                    window.location.hash = '#login';
+                }
+            } else {
+                document.getElementById('hero').classList.remove('hidden');
+                document.getElementById('courses').classList.remove('hidden');
+            }
+        }
+
+        // Login user
+        function loginUser() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Find user
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                // Store current user in localStorage
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Update UI
+                checkAuthStatus();
+                
+                // Redirect to dashboard
+                window.location.hash = 'dashboard';
+                
+                // Clear form
+                document.getElementById('loginForm').reset();
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        // Register user
+        function registerUser() {
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Check if username already exists
+            if (users.some(u => u.username === username)) {
+                alert('Username already exists');
+                return;
+            }
+            
+            // Create new user
+            const newUser = {
+                id: Date.now(),
+                username,
+                email,
+                password,
+                enrolledCourses: [],
+                completedContent: {}
+            };
+            
+            // Add to users array
+            users.push(newUser);
+            
+            // Save to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Login the new user
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            
+            // Update UI
+            checkAuthStatus();
+            
+            // Redirect to dashboard
+            window.location.hash = 'dashboard';
+            
+            // Clear form
+            document.getElementById('registerForm').reset();
+        }
+
+        // Logout user
+        function logoutUser() {
+            // Remove current user from localStorage
+            localStorage.removeItem('currentUser');
+            
+            // Update UI
+            checkAuthStatus();
+            
+            // Redirect to home
+            window.location.hash = '';
+        }
+
+        // Show dashboard
+        function showDashboard(user) {
+            // Set user info
+            document.getElementById('dashboardUsername').textContent = user.username;
+            document.getElementById('dashboardEmail').textContent = user.email;
+            
+            // Show enrolled courses
+            displayEnrolledCourses(user);
+            
+            // Show progress
+            displayProgress(user);
+            
+            // Set account form values
+            document.getElementById('accountUsername').value = user.username;
+            document.getElementById('accountEmail').value = user.email;
+            
+            // Show default section
+            showDashboardSection('myCoursesContent');
+        }
+
+        // Show dashboard section
+        function showDashboardSection(sectionId) {
+            // Hide all sections
+            document.getElementById('myCoursesContent').classList.add('hidden');
+            document.getElementById('courseContent').classList.add('hidden');
+            document.getElementById('progressContent').classList.add('hidden');
+            document.getElementById('accountContent').classList.add('hidden');
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show the requested section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Add active class to corresponding nav link
+            if (sectionId === 'myCoursesContent') {
+                document.getElementById('myCoursesLink').classList.add('active');
+            } else if (sectionId === 'progressContent') {
+                document.getElementById('progressLink').classList.add('active');
+            } else if (sectionId === 'accountContent') {
+                document.getElementById('accountLink').classList.add('active');
+            }
+        }
+
+        // Display enrolled courses
+        function displayEnrolledCourses(user) {
+            const enrolledCoursesDiv = document.getElementById('enrolledCourses');
+            
+            if (user.enrolledCourses.length === 0) {
+                enrolledCoursesDiv.innerHTML = '<p>You haven\'t enrolled in any courses yet.</p>';
+                return;
+            }
+            
+            enrolledCoursesDiv.innerHTML = '';
+            
+            user.enrolledCourses.forEach(courseId => {
+                const course = courses.find(c => c.id === courseId);
+                if (course) {
+                    const courseDiv = document.createElement('div');
+                    courseDiv.className = 'course-card';
+                    courseDiv.innerHTML = `
+                        <div class="course-image">
+                            <img src="${course.image}" alt="${course.title}">
+                        </div>
+                        <div class="course-info">
+                            <h3>${course.title}</h3>
+                            <p class="instructor">By ${course.instructor}</p>
+                            <div class="course-meta">
+                                <span class="duration">${course.duration}</span>
+                                <button class="btn view-course-btn" data-course-id="${course.id}">Continue Learning</button>
+                            </div>
+                        </div>
+                    `;
+                    enrolledCoursesDiv.appendChild(courseDiv);
+                }
+            });
+        }
+
+        // Enroll in a course
+        function enrollInCourse(courseId) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) {
+                alert('Please login to enroll in courses');
+                window.location.hash = 'login';
+                return;
+            }
+            
+            // Check if already enrolled
+            if (currentUser.enrolledCourses.includes(courseId)) {
+                alert('You are already enrolled in this course');
+                return;
+            }
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Find user in users array
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1) {
+                // Add course to enrolled courses
+                users[userIndex].enrolledCourses.push(courseId);
+                
+                // Initialize completed content for this course
+                if (!users[userIndex].completedContent[courseId]) {
+                    users[userIndex].completedContent[courseId] = [];
+                }
+                
+                // Save updated users array
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Update current user
+                localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
+                
+                // Show success message
+                alert('Successfully enrolled in the course!');
+                
+                // Update dashboard
+                showDashboard(users[userIndex]);
+            }
+        }
+
+        // Show course content
+        function showCourseContent(courseId) {
+            const course = courses.find(c => c.id === courseId);
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!course || !currentUser) return;
+            
+            // Set course title
+            document.getElementById('courseContentTitle').textContent = course.title;
+            
+            // Display course content
+            const contentItemsDiv = document.getElementById('courseContentItems');
+            contentItemsDiv.innerHTML = '';
+            
+            course.content.forEach(item => {
+                const isCompleted = currentUser.completedContent[courseId] && 
+                                   currentUser.completedContent[courseId].includes(item.id);
+                
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `content-item ${isCompleted ? 'completed' : ''}`;
+                itemDiv.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p>${item.content}</p>
+                    ${isCompleted ? 
+                        '<p><strong>Completed!</strong></p>' : 
+                        `<button class="complete-btn" data-course-id="${courseId}" data-content-id="${item.id}">Mark as Complete</button>`}
+                `;
+                contentItemsDiv.appendChild(itemDiv);
+            });
+            
+            // Show course content section
+            document.getElementById('myCoursesContent').classList.add('hidden');
+            document.getElementById('courseContent').classList.remove('hidden');
+            
+            // Add back button
+            const backButton = document.createElement('button');
+            backButton.id = 'backToCourses';
+            backButton.className = 'btn btn-outline';
+            backButton.textContent = 'Back to My Courses';
+            contentItemsDiv.parentNode.insertBefore(backButton, contentItemsDiv);
+        }
+
+        // Mark content as complete
+        function markContentComplete(courseId, contentId) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) return;
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Find user in users array
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1) {
+                // Initialize completed content array for this course if it doesn't exist
+                if (!users[userIndex].completedContent[courseId]) {
+                    users[userIndex].completedContent[courseId] = [];
+                }
+                
+                // Add content ID to completed array if not already there
+                if (!users[userIndex].completedContent[courseId].includes(contentId)) {
+                    users[userIndex].completedContent[courseId].push(contentId);
+                }
+                
+                // Save updated users array
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Update current user
+                localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
+                
+                // Refresh course content view
+                showCourseContent(courseId);
+                
+                // Update progress display
+                displayProgress(users[userIndex]);
+            }
+        }
+
+        // Display progress
+        function displayProgress(user) {
+            const progressStatsDiv = document.getElementById('progressStats');
+            
+            let totalContent = 0;
+            let completedContent = 0;
+            
+            // Calculate progress for each enrolled course
+            user.enrolledCourses.forEach(courseId => {
+                const course = courses.find(c => c.id === courseId);
+                if (course) {
+                    totalContent += course.content.length;
+                    if (user.completedContent[courseId]) {
+                        completedContent += user.completedContent[courseId].length;
+                    }
+                }
+            });
+            
+            const progressPercentage = totalContent > 0 ? Math.round((completedContent / totalContent) * 100) : 0;
+            
+            progressStatsDiv.innerHTML = `
+                <h3>Overall Progress</h3>
+                <p>You've completed ${completedContent} of ${totalContent} learning items (${progressPercentage}%)</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progressPercentage}%"></div>
+                </div>
+                
+                <h3 style="margin-top: 30px;">Course Progress</h3>
+            `;
+            
+            // Add progress for each course
+            user.enrolledCourses.forEach(courseId => {
+                const course = courses.find(c => c.id === courseId);
+                if (course) {
+                    const courseCompleted = user.completedContent[courseId] ? user.completedContent[courseId].length : 0;
+                    const coursePercentage = Math.round((courseCompleted / course.content.length) * 100);
+                    
+                    const courseProgressDiv = document.createElement('div');
+                    courseProgressDiv.style.marginTop = '15px';
+                    courseProgressDiv.innerHTML = `
+                        <h4>${course.title}</h4>
+                        <p>${courseCompleted} of ${course.content.length} items completed (${coursePercentage}%)</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${coursePercentage}%"></div>
+                        </div>
+                    `;
+                    progressStatsDiv.appendChild(courseProgressDiv);
+                }
+            });
+        }
+
+        // Update account
+        function updateAccount() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) return;
+            
+            const email = document.getElementById('accountEmail').value;
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validate current password
+            if (currentPassword && currentPassword !== currentUser.password) {
+                alert('Current password is incorrect');
+                return;
+            }
+            
+            // Validate new password
+            if (newPassword && newPassword !== confirmPassword) {
+                alert('New passwords do not match');
+                return;
+            }
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Find user in users array
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1) {
+                // Update user info
+                users[userIndex].email = email;
+                if (newPassword) {
+                    users[userIndex].password = newPassword;
+                }
+                
+                // Save updated users array
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Update current user
+                localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
+                
+                // Show success message
+                alert('Account updated successfully!');
+                
+                // Clear password fields
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+                
+                // Update dashboard
+                showDashboard(users[userIndex]);
+            }
+        }
+        // Toggle menu for mobile
+document.getElementById('menuToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('active');
+});
+
+// Close menu when clicking a link (for mobile)
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+    });
+});
+    </script>
+</body>
+</html>
